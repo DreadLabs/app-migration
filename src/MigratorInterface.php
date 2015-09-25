@@ -35,7 +35,7 @@ interface MigratorInterface
      * @return int Version of the latest migration executed
      *
      * @throws InvalidDirectionException If the current migration version is
-     *                                   younger than the migration version
+     *                                   older than the migration version
      *                                   to migrate to
      * @throws MigrationException If a migration cannot be executed due of
      *                            errors (syntax, ...)
