@@ -37,11 +37,11 @@ class Mutex implements LockInterface
 
     /**
      * @param NinjaMutexLockInterface $lock
-     * @param string $name
+     * @param NameInterface $name
      */
-    public function __construct(NinjaMutexLockInterface $lock, $name = 'typo3-cms-migration')
+    public function __construct(NinjaMutexLockInterface $lock, NameInterface $name)
     {
-        $this->mutex = new \NinjaMutex\Mutex($name, $lock);
+        $this->mutex = new \NinjaMutex\Mutex((string) $name, $lock);
     }
 
     /**
