@@ -30,7 +30,7 @@ class MutexTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->lock = $this->getMock(LockInterface::class);
+        $this->lock = $this->getMock(LockInterface::class, array('acquireLock', 'releaseLock', 'isLocked'));
     }
 
     public function testItThrowsALockingExceptionIfLockCantBeAcquired()
@@ -41,7 +41,7 @@ class MutexTest extends \PHPUnit_Framework_TestCase
         $this->lock->expects($this->never())->method('releaseLock');
 
         $mutex = new Mutex($this->lock);
-        $mutex->acquireLock(42);
+        $mutex->acquire(42);
     }
 
     public function testItAcquiresLockingOnTheLock()
@@ -50,7 +50,7 @@ class MutexTest extends \PHPUnit_Framework_TestCase
         $this->lock->expects($this->once())->method('releaseLock')->willReturn(true);
 
         $mutex = new Mutex($this->lock);
-        $this->assertTrue($mutex->acquireLock(42));
+        $mutex->acquire(42);
     }
 
     public function testItReleasesLockingOnTheLock()
@@ -59,7 +59,7 @@ class MutexTest extends \PHPUnit_Framework_TestCase
         $this->lock->expects($this->once())->method('releaseLock')->with('typo3-cms-migration')->willReturn(true);
 
         $mutex = new Mutex($this->lock);
-        $this->assertTrue($mutex->acquireLock(23));
-        $this->assertTrue($mutex->releaseLock());
+        $mutex->acquire(23);
+        $mutex->release();
     }
 }

@@ -80,7 +80,7 @@ class PhinxLocking implements MediatorInterface
         $catchedException = null;
 
         try {
-            $this->mutex->acquireLock(1000);
+            $this->mutex->acquire(1000);
             $this->executeMigrations();
         } catch (LockingException $exc) {
             $this->logger->emergency($exc->getMessage());
@@ -96,7 +96,7 @@ class PhinxLocking implements MediatorInterface
             $catchedException = $exc;
         }
 
-        $this->mutex->releaseLock();
+        $this->mutex->release();
 
         if (!is_null($catchedException)) {
             throw $catchedException;

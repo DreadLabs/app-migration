@@ -53,8 +53,8 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(LockingException::class);
 
-        $this->mutex->expects($this->once())->method('acquireLock')->willThrowException(new LockingException());
-        $this->mutex->expects($this->once())->method('releaseLock')->willReturn(true);
+        $this->mutex->expects($this->once())->method('acquire')->willThrowException(new LockingException());
+        $this->mutex->expects($this->once())->method('release')->willReturn(true);
 
         $this->logger->expects($this->once())->method('emergency');
 
@@ -69,8 +69,8 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
         $this->migrator->expects($this->once())->method('needsToRun')->willReturn(true);
         $this->migrator->expects($this->once())->method('migrate')->willThrowException(new InvalidDirectionException());
 
-        $this->mutex->expects($this->once())->method('acquireLock')->willReturn(true);
-        $this->mutex->expects($this->once())->method('releaseLock')->willReturn(true);
+        $this->mutex->expects($this->once())->method('acquire')->willReturn(true);
+        $this->mutex->expects($this->once())->method('release')->willReturn(true);
 
         $this->logger->expects($this->once())->method('emergency');
 
@@ -85,8 +85,8 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
         $this->migrator->expects($this->once())->method('needsToRun')->willReturn(true);
         $this->migrator->expects($this->once())->method('migrate')->willThrowException(new MigrationException());
 
-        $this->mutex->expects($this->once())->method('acquireLock')->willReturn(true);
-        $this->mutex->expects($this->once())->method('releaseLock')->willReturn(true);
+        $this->mutex->expects($this->once())->method('acquire')->willReturn(true);
+        $this->mutex->expects($this->once())->method('release')->willReturn(true);
 
         $this->logger->expects($this->once())->method('emergency');
 
@@ -99,8 +99,8 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
         $this->migrator->expects($this->once())->method('needsToRun')->willReturn(true);
         $this->migrator->expects($this->once())->method('migrate')->willReturn(42);
 
-        $this->mutex->expects($this->once())->method('acquireLock')->willReturn(true);
-        $this->mutex->expects($this->once())->method('releaseLock')->willReturn(true);
+        $this->mutex->expects($this->once())->method('acquire')->willReturn(true);
+        $this->mutex->expects($this->once())->method('release')->willReturn(true);
 
         $this->logger->expects($this->once())->method('info')->with($this->stringContains('42'));
 

@@ -47,26 +47,24 @@ class Mutex implements LockInterface
     /**
      * @param int $timeout Timeout in milliseconds
      *
-     * @return bool
+     * @return void
      *
      * @throws LockingException If the lock is not acquirable
      */
-    public function acquireLock($timeout)
+    public function acquire($timeout)
     {
         $isAcquired = $this->mutex->acquireLock($timeout);
 
         if (!$isAcquired) {
             throw new LockingException('Lock cannot be acquired.', 1438871269);
         }
-
-        return $isAcquired;
     }
 
     /**
-     * @return bool
+     * @return void
      */
-    public function releaseLock()
+    public function release()
     {
-        return $this->mutex->releaseLock();
+        $this->mutex->releaseLock();
     }
 }

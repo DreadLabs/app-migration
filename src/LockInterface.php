@@ -26,16 +26,16 @@ interface LockInterface
      *
      * @param int $timeout
      *
-     * @return bool
+     * @return void
      *
      * @throws LockingException If the lock is not acquirable
      */
-    public function acquireLock($timeout);
+    public function acquire($timeout);
 
     /**
      * Releases a lock
      *
-     * @return bool
+     * @return void
      */
-    public function releaseLock();
+    public function release();
 }
