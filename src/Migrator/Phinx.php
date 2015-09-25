@@ -11,7 +11,7 @@
 
 namespace DreadLabs\AppMigration\Migrator;
 
-use DreadLabs\AppMigration\Exception\InvalidDirectionException;
+use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\MigratorInterface;
 use DreadLabs\AppMigration\OutputInterface;
@@ -127,9 +127,8 @@ class Phinx implements MigratorInterface
      *
      * @return int Version of the latest migration executed
      *
-     * @throws InvalidDirectionException If the current migration version is
-     *                                   older than the migration version
-     *                                   to migrate to
+     * @throws TopologyViolationException If an unprocessed migration is younger than
+     *                                    the latest processed migration.
      * @throws MigrationException If a migration cannot be executed due of
      *                            errors (syntax, ...)
      */
@@ -139,7 +138,7 @@ class Phinx implements MigratorInterface
         $direction = $targetVersion > $this->currentVersion ? MigrationInterface::UP : MigrationInterface::DOWN;
 
         if ($direction === MigrationInterface::DOWN) {
-            throw new InvalidDirectionException();
+            throw new TopologyViolationException();
         }
 
         try {

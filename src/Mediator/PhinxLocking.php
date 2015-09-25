@@ -11,7 +11,7 @@
 
 namespace DreadLabs\AppMigration\Mediator;
 
-use DreadLabs\AppMigration\Exception\InvalidDirectionException;
+use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\Exception\LockingException;
 use DreadLabs\AppMigration\LockInterface;
@@ -86,7 +86,7 @@ class PhinxLocking implements MediatorInterface
             $this->logger->emergency($exc->getMessage());
 
             $catchedException = $exc;
-        } catch (InvalidDirectionException $exc) {
+        } catch (TopologyViolationException $exc) {
             $this->logger->emergency('The version to migrate to is older than the current one.');
 
             $catchedException = $exc;

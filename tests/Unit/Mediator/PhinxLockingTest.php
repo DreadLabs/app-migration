@@ -11,7 +11,7 @@
 
 namespace DreadLabs\AppMigration\Tests\Unit\Mediator;
 
-use DreadLabs\AppMigration\Exception\InvalidDirectionException;
+use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\LockingException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\LockInterface;
@@ -62,12 +62,12 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
         $mediator->negotiate();
     }
 
-    public function testItLogsEmergencyIfInvalidMigrationDirectionIsDetermined()
+    public function testItLogsEmergencyIfTopologyIsViolated()
     {
-        $this->setExpectedException(InvalidDirectionException::class);
+        $this->setExpectedException(TopologyViolationException::class);
 
         $this->migrator->expects($this->once())->method('needsToRun')->willReturn(true);
-        $this->migrator->expects($this->once())->method('migrate')->willThrowException(new InvalidDirectionException());
+        $this->migrator->expects($this->once())->method('migrate')->willThrowException(new TopologyViolationException());
 
         $this->mutex->expects($this->once())->method('acquire')->willReturn(true);
         $this->mutex->expects($this->once())->method('release')->willReturn(true);

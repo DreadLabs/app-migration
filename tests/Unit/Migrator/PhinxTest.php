@@ -11,7 +11,7 @@
 
 namespace DreadLabs\AppMigration\Tests\Unit\Migrator;
 
-use DreadLabs\AppMigration\Exception\InvalidDirectionException;
+use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\Migrator\Phinx;
 use DreadLabs\AppMigration\OutputInterface;
@@ -103,9 +103,9 @@ class PhinxTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($migrator->needsToRun());
     }
 
-    public function testItThrowsAnInvalidDirectionExceptionOnOlderUnmigratedVersions()
+    public function testItAdheresToATopologicalOrder()
     {
-        $this->setExpectedException(InvalidDirectionException::class);
+        $this->setExpectedException(TopologyViolationException::class);
 
         $this->registerTestAdapter(TestInvalidDirectionAdapter::class);
 

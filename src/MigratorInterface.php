@@ -11,7 +11,7 @@
 
 namespace DreadLabs\AppMigration;
 
-use DreadLabs\AppMigration\Exception\InvalidDirectionException;
+use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 
 /**
@@ -34,9 +34,8 @@ interface MigratorInterface
      *
      * @return int Version of the latest migration executed
      *
-     * @throws InvalidDirectionException If the current migration version is
-     *                                   older than the migration version
-     *                                   to migrate to
+     * @throws TopologyViolationException If an unprocessed migration is younger than
+     *                                    the latest processed migration.
      * @throws MigrationException If a migration cannot be executed due of
      *                            errors (syntax, ...)
      */

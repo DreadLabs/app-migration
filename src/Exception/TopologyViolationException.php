@@ -12,12 +12,13 @@
 namespace DreadLabs\AppMigration\Exception;
 
 /**
- * InvalidDirectionException
+ * TopologyViolationException
  *
- * Will be thrown if the direction convention is violated.
+ * Must be thrown if an unprocessed migration is younger than
+ * the latest processed migration.
  *
  * @author Thomas Juhnke <dev@van-tomas.de>
  */
-class InvalidDirectionException extends MigrationException
+class TopologyViolationException extends MigrationException
 {
 }
