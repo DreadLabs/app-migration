@@ -12,11 +12,13 @@
 namespace DreadLabs\AppMigration\Lock;
 
 use DreadLabs\AppMigration\Exception\LockingException;
+use DreadLabs\AppMigration\Lock\NinjaMutex\TimeoutInterface;
 use DreadLabs\AppMigration\LockInterface;
 use NinjaMutex\Lock\LockInterface as NinjaMutexLockInterface;
+use NinjaMutex\Mutex;
 
 /**
- * Mutex
+ * NinjaMutex
  *
  * Thin wrapper around the NinjaMutex\Mutex to allow usage
  * within frameworks without proper DIC.
@@ -27,33 +29,40 @@ use NinjaMutex\Lock\LockInterface as NinjaMutexLockInterface;
  *
  * @author Thomas Juhnke <dev@van-tomas.de>
  */
-class Mutex implements LockInterface
+class NinjaMutex implements LockInterface
 {
 
     /**
-     * @var \NinjaMutex\Mutex
+     * @var Mutex
      */
-    private $mutex;
+    private $lock;
 
     /**
-     * @param NinjaMutexLockInterface $lock
-     * @param NameInterface $name
+     * @var TimeoutInterface
      */
-    public function __construct(NinjaMutexLockInterface $lock, NameInterface $name)
+    private $timeout;
+
+    /**
+     * Constructor
+     *
+     * @param NinjaMutexLockInterface $backend
+     * @param NameInterface $name
+     * @param TimeoutInterface $timeout
+     */
+    public function __construct(NinjaMutexLockInterface $backend, NameInterface $name, TimeoutInterface $timeout)
     {
-        $this->mutex = new \NinjaMutex\Mutex((string) $name, $lock);
+        $this->lock = new Mutex((string) $name, $backend);
+        $this->timeout = $timeout;
     }
 
     /**
-     * @param int $timeout Timeout in milliseconds
-     *
      * @return void
      *
      * @throws LockingException If the lock is not acquirable
      */
-    public function acquire($timeout)
+    public function acquire()
     {
-        $isAcquired = $this->mutex->acquireLock($timeout);
+        $isAcquired = $this->lock->acquireLock($this->timeout->getValue());
 
         if (!$isAcquired) {
             throw new LockingException('Lock cannot be acquired.', 1438871269);
@@ -65,6 +74,6 @@ class Mutex implements LockInterface
      */
     public function release()
     {
-        $this->mutex->releaseLock();
+        $this->lock->releaseLock();
     }
 }

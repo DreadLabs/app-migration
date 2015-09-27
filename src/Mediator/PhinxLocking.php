@@ -36,11 +36,11 @@ class PhinxLocking implements MediatorInterface
     private $migrator;
 
     /**
-     * The mutex
+     * The lock
      *
      * @var LockInterface
      */
-    private $mutex;
+    private $lock;
 
     /**
      * The logger
@@ -53,16 +53,16 @@ class PhinxLocking implements MediatorInterface
      * Constructor
      *
      * @param MigratorInterface $migrator The migrator
-     * @param LockInterface $mutex The Mutex
+     * @param LockInterface $lock The Lock
      * @param LoggerInterface $logger The logger
      */
     public function __construct(
         MigratorInterface $migrator,
-        LockInterface $mutex,
+        LockInterface $lock,
         LoggerInterface $logger
     ) {
         $this->migrator = $migrator;
-        $this->mutex = $mutex;
+        $this->lock = $lock;
         $this->logger = $logger;
     }
 
@@ -80,7 +80,7 @@ class PhinxLocking implements MediatorInterface
         $catchedException = null;
 
         try {
-            $this->mutex->acquire(1000);
+            $this->lock->acquire();
             $this->executeMigrations();
         } catch (LockingException $exc) {
             $this->logger->emergency($exc->getMessage());
@@ -96,7 +96,7 @@ class PhinxLocking implements MediatorInterface
             $catchedException = $exc;
         }
 
-        $this->mutex->release();
+        $this->lock->release();
 
         if (!is_null($catchedException)) {
             throw $catchedException;

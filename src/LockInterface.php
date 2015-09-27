@@ -24,13 +24,11 @@ interface LockInterface
     /**
      * Acquires a lock
      *
-     * @param int $timeout
-     *
      * @return void
      *
      * @throws LockingException If the lock is not acquirable
      */
-    public function acquire($timeout);
+    public function acquire();
 
     /**
      * Releases a lock
