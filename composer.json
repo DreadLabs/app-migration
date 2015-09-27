@@ -10,7 +10,6 @@
     }
   ],
   "require": {
-    "robmorgan/phinx": "0.4.4"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.6",
