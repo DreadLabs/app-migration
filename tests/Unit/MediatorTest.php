@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace DreadLabs\AppMigration\Tests\Unit\Mediator;
+namespace DreadLabs\AppMigration\Tests\Unit;
 
 use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\LockingException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\LockInterface;
 use DreadLabs\AppMigration\LoggerInterface;
-use DreadLabs\AppMigration\Mediator\PhinxLocking;
+use DreadLabs\AppMigration\Mediator;
 use DreadLabs\AppMigration\MigratorInterface;
 
 /**
- * PhinxLockingTest
+ * MediatorTest
  *
  * @author Thomas Juhnke <dev@van-tomas.de>
  */
-class PhinxLockingTest extends \PHPUnit_Framework_TestCase
+class MediatorTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -58,7 +58,7 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
 
         $this->logger->expects($this->once())->method('emergency');
 
-        $mediator = new PhinxLocking($this->migrator, $this->mutex, $this->logger);
+        $mediator = new Mediator($this->migrator, $this->mutex, $this->logger);
         $mediator->negotiate();
     }
 
@@ -74,7 +74,7 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
 
         $this->logger->expects($this->once())->method('emergency');
 
-        $mediator = new PhinxLocking($this->migrator, $this->mutex, $this->logger);
+        $mediator = new Mediator($this->migrator, $this->mutex, $this->logger);
         $mediator->negotiate();
     }
 
@@ -90,7 +90,7 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
 
         $this->logger->expects($this->once())->method('emergency');
 
-        $mediator = new PhinxLocking($this->migrator, $this->mutex, $this->logger);
+        $mediator = new Mediator($this->migrator, $this->mutex, $this->logger);
         $mediator->negotiate();
     }
 
@@ -104,7 +104,7 @@ class PhinxLockingTest extends \PHPUnit_Framework_TestCase
 
         $this->logger->expects($this->once())->method('info')->with($this->stringContains('42'));
 
-        $mediator = new PhinxLocking($this->migrator, $this->mutex, $this->logger);
+        $mediator = new Mediator($this->migrator, $this->mutex, $this->logger);
         $mediator->negotiate();
     }
 }

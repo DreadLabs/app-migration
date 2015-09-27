@@ -9,25 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace DreadLabs\AppMigration\Mediator;
+namespace DreadLabs\AppMigration;
 
 use DreadLabs\AppMigration\Exception\TopologyViolationException;
 use DreadLabs\AppMigration\Exception\MigrationException;
 use DreadLabs\AppMigration\Exception\LockingException;
-use DreadLabs\AppMigration\LockInterface;
-use DreadLabs\AppMigration\LoggerInterface;
-use DreadLabs\AppMigration\MediatorInterface;
-use DreadLabs\AppMigration\MigratorInterface;
 
 /**
- * PhinxLocking
+ * Mediator
  *
- * Mediates the phinx migrator and a mutex lock to allow an application to
- * switch to maintenance mode if something went wrong.
+ * Mediates between a migrator,locking and logging.
  *
  * @author Thomas Juhnke <dev@van-tomas.de>
  */
-class PhinxLocking implements MediatorInterface
+class Mediator implements MediatorInterface
 {
 
     /**
