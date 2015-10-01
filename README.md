@@ -13,7 +13,7 @@ PHP application.
 
 ## Installation
 
-    ~ $ php composer.phar require dreadlabs/app-migration:~0.1.0
+    ~ $ php composer.phar require dreadlabs/app-migration:~0.1.1
 
 ## Components
 
