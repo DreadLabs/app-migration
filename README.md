@@ -28,7 +28,7 @@ PHP application.
 
 -  dreadlabs/app-migration-lock-ninjamutex - A lock adapter for `arvenil/ninja-mutex`
 -  dreadlabs/app-migration-migrator-phinx - A migrator adapter for `robmorgan/phinx`
--  dreadlabs/app-migration-app-typo3 - An integration into TYPO3.CMS
+-  dreadlabs/app-migration-typo3 - An integration into TYPO3.CMS
 
 ## Opinionated - why?
 
@@ -47,3 +47,7 @@ can go  into CVS.
 Logging is essential during migration. If something went wrong, you need to know as 
 soon as possible what is the problem. Logging is a first class citizen in the mediator. 
 If you don't need logging, just pass in a NullLogger and you're good to go. 
+
+## License
+
+MIT, © 2015 Thomas Juhnke
