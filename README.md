@@ -7,7 +7,7 @@ PHP application.
 
 [![Build Status](https://travis-ci.org/DreadLabs/app-migration.svg?branch=master)](https://travis-ci.org/DreadLabs/app-migration)
 [![Coverage Status](https://coveralls.io/repos/DreadLabs/app-migration/badge.svg?branch=master&service=github)](https://coveralls.io/github/DreadLabs/app-migration?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/312ef624-c317-41c7-859d-bdd270c8b3b4/big.png)](https://insight.sensiolabs.com/projects/312ef624-c317-41c7-859d-bdd270c8b3b4)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/312ef624-c317-41c7-859d-bdd270c8b3b4/mini.png)](https://insight.sensiolabs.com/projects/312ef624-c317-41c7-859d-bdd270c8b3b4)
 [![Code Climate](https://codeclimate.com/github/DreadLabs/app-migration/badges/gpa.svg)](https://codeclimate.com/github/DreadLabs/app-migration)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DreadLabs/app-migration/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DreadLabs/app-migration/?branch=master)
 
