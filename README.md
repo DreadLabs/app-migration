@@ -34,9 +34,9 @@ PHP application.
    
 ## Companion packages
 
--  dreadlabs/app-migration-lock-ninjamutex - A lock adapter for `arvenil/ninja-mutex`
--  dreadlabs/app-migration-migrator-phinx - A migrator adapter for `robmorgan/phinx`
--  dreadlabs/app-migration-typo3 - An integration into TYPO3.CMS
+-  [dreadlabs/app-migration-lock-ninjamutex][gh_lock_impl] - A lock adapter for `arvenil/ninja-mutex`
+-  [dreadlabs/app-migration-migrator-phinx][gh_migrator_impl] - A migrator adapter for `robmorgan/phinx`
+-  [dreadlabs/app-migration-typo3][gh_app_typo3] - An integration into TYPO3.CMS
 
 ## Opinionated - why?
 
@@ -59,3 +59,7 @@ If you don't need logging, just pass in a NullLogger and you're good to go.
 ## License
 
 MIT, © 2015 Thomas Juhnke
+
+[gh_lock_impl]: //github.com/DreadLabs/app-migration-lock-ninjamutex
+[gh_migrator_impl]: //github.com/DreadLabs/app-migration-migrator-phinx
+[gh_app_typo3]: //github.com/DreadLabs/app-migration-typo3
